@@ -10,8 +10,8 @@ controller.getTodos = async (req, res) => {
 
 controller.getTodo = async (req, res) => {
     const { id } = req.params;
-    const todoList = await TodoModel.findById(id);
-    return res.status(200).json(todoList);
+    const todo = await TodoModel.findById(id);
+    return res.status(200).json(todo);
 };
 
 controller.postTodo = async (req, res) => {

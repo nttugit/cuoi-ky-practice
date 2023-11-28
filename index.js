@@ -1,23 +1,29 @@
+// Các thư viện cơ bản, mọi người cứ giữ nguyên
 import express from 'express';
-// Thư viện giúp sử dụng biến môi trường trong file .env
 import dotenv from 'dotenv';
-dotenv.config(); //Khai ba
+import cors from 'cors';
+dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
+// notes: đổi port nểu muốn
 const port = process.env.PORT || 3000; //Mặc định là port 3000
 // Kết nối database
-import connectDB from './utils/db.js';
+import './utils/db.js';
 
 // XỬ LÝ ROUTES
 import todoRouter from './routes/todo.route.js';
+// Ads Location routes
+import adsLocationRouter from './routes/adsLocation.route.js';
 
 app.get('/', (req, res) => {
     res.json('Hello World!');
 });
 
 app.use('/todos', todoRouter);
+app.use('/ads-locations', adsLocationRouter);
 
 // Xử lý lỗi 404
 app.use((req, res) => {

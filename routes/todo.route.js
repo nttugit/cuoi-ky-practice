@@ -5,7 +5,7 @@ import todoController from '../controllers/todo.controller.js';
 // Lấy danh sách todos
 router.get('/', todoController.getTodos);
 // Lấy thông tin chi tiết
-router.get('/', todoController.getTodo);
+router.get('/:id', todoController.getTodo);
 // Tạo
 router.post('/', todoController.postTodo);
 // Cập nhật

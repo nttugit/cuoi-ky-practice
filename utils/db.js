@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-// todos: Thay đổi tên database ở đây là được
-const dbName = 'todo-practice';
+// notes: Thay đổi tên database ở đây là được
+const dbName = 'cuoi-ky-practice';
 const dbUrl = `mongodb://127.0.0.1:27017/${dbName}`;
 
 // Connect to MongoDB
