@@ -3,19 +3,21 @@
  * - nhớ import đúng model dưới đây
  * - resp là kết quả trả về khi thao tác với database, cứ giữ nguyên tên biến cho dễ
  */
-import Model from '../models/adsLocation.model.js';
+import Model from '../models/adsCategory.model.js';
+// import AdsCategoryModel from '../models/adsCategory.model.js';
+// import LocationTypeModel from '../models/locationType.model.js';
 
 const controller = {};
 
 // Lấy danh sách
-controller.getAdsLocations = async (req, res) => {
+controller.getAdsCategories = async (req, res) => {
     const conditions = {};
     const result = await Model.findAll(conditions);
     res.status(200).json(result);
 };
 
 // Lấy thông tin chi tiết
-controller.getAdsLocation = async (req, res) => {
+controller.getAdsCategory = async (req, res) => {
     const id = req.params.id || 0;
     const adsLocation = await Model.findById(id);
     if (adsLocation === null) {
@@ -25,7 +27,7 @@ controller.getAdsLocation = async (req, res) => {
 };
 
 // Tạo mới
-controller.postAdsLocation = async (req, res) => {
+controller.postAdsCategory = async (req, res) => {
     let data = req.body;
 
     const ret = await Model.add(data);
@@ -37,7 +39,7 @@ controller.postAdsLocation = async (req, res) => {
 };
 
 // Cập nhật
-controller.patchAdsLocation = async (req, res) => {
+controller.patchAdsCategory = async (req, res) => {
     const id = req.params.id || 0;
     const data = req.body;
     const found = await Model.findById(id);
@@ -53,7 +55,7 @@ controller.patchAdsLocation = async (req, res) => {
 };
 
 // Xoá
-controller.deleteAdsLocation = async (req, res) => {
+controller.deleteAdsCategory = async (req, res) => {
     const id = req.params.id || 0;
     const found = await Model.findById(id);
     if (found === null) {

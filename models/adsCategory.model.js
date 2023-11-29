@@ -1,15 +1,5 @@
-import mongoose from 'mongoose';
+import generate from './geneic.model.js';
 
-const Schema = mongoose.Schema;
-
-const AdsCategorySchema = new Schema(
-    {
-        name: String,
-    },
-    { versionKey: false },
-);
-
-// Nên đặt tên db có xếp gạch để mongo hiển thị dễ nhìn
-const Model = mongoose.model('ads_category', AdsCategorySchema);
-
-export default Model;
+// notes: nhớ cập nhật chỗ này TÊN MODEL và KHOÁ CHÍNH tương ứng
+const obj = generate('ads_category', 'ads_category_id');
+export default obj;

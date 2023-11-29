@@ -10,20 +10,18 @@ app.use(cors());
 
 // notes: đổi port nểu muốn
 const port = process.env.PORT || 3000; //Mặc định là port 3000
-// Kết nối database
-import './utils/db.js';
 
 // XỬ LÝ ROUTES
-import todoRouter from './routes/todo.route.js';
 // Ads Location routes
 import adsLocationRouter from './routes/adsLocation.route.js';
+import adsCategoryRouter from './routes/adsCategory.route.js';
 
 app.get('/', (req, res) => {
-    res.json('Hello World!');
+    res.status(200).json('Hello World!');
 });
 
-app.use('/todos', todoRouter);
 app.use('/ads-locations', adsLocationRouter);
+app.use('/ads-categories', adsCategoryRouter);
 
 // Xử lý lỗi 404
 app.use((req, res) => {
@@ -37,5 +35,5 @@ app.use((err, req, res, next) => {
 
 // Chạy ứng dụng
 app.listen(port, () => {
-    console.log(`Big Ads server is listening on http://localhost:${port}`);
+    console.log(`Server is listening on http://localhost:${port}`);
 });

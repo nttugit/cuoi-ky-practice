@@ -1,14 +1,5 @@
-import mongoose from 'mongoose';
+import generate from './geneic.model.js';
 
-const Schema = mongoose.Schema;
-
-const LocationTypeSchema = new Schema(
-    {
-        name: String,
-    },
-    { versionKey: false },
-);
-
-const Model = mongoose.model('location_type', LocationTypeSchema);
-
-export default Model;
+// notes: nhớ cập nhật chỗ này TÊN MODEL và KHOÁ CHÍNH tương ứng
+const obj = generate('location_type', 'location_type_id');
+export default obj;
