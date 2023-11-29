@@ -19,11 +19,11 @@ controller.getAdsCategories = async (req, res) => {
 // Lấy thông tin chi tiết
 controller.getAdsCategory = async (req, res) => {
     const id = req.params.id || 0;
-    const adsLocation = await Model.findById(id);
-    if (adsLocation === null) {
+    const adsCategory = await Model.findById(id);
+    if (adsCategory === null) {
         return res.status(204).end();
     }
-    res.status(200).json(adsLocation);
+    res.status(200).json(adsCategory);
 };
 
 // Tạo mới
@@ -32,7 +32,7 @@ controller.postAdsCategory = async (req, res) => {
 
     const ret = await Model.add(data);
     data = {
-        ads_location_id: ret[0],
+        ads_category_id: ret[0],
         ...data,
     };
     res.status(201).json(data);
