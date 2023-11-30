@@ -1,5 +1,13 @@
-import generate from './geneic.model.js';
+import BaseModel from './base.model.js';
 
-// notes: nhớ cập nhật chỗ này TÊN MODEL và KHOÁ CHÍNH tương ứng
-const obj = generate('ads_location', 'ads_location_id');
-export default obj;
+class LocationTypeModel extends BaseModel {
+    constructor() {
+        super('ads_location', 'ads_location_id');
+    }
+    // Mở rộng thêm code ở đây
+    // getAllWithJoin(){
+    //     return this.knex.select('*').from(this.tableName).where({});
+    // }
+}
+
+export default LocationTypeModel;

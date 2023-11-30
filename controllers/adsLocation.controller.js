@@ -1,24 +1,36 @@
 /**
  * notes:
  * - nhớ import đúng model dưới đây
- * - resp là kết quả trả về khi thao tác với database, cứ giữ nguyên tên biến cho dễ
  */
 import Model from '../models/adsLocation.model.js';
+const model = new Model();
 
 const controller = {};
 
 // Lấy danh sách
 controller.getAdsLocations = async (req, res) => {
     const conditions = {};
-    const result = await Model.findAll(conditions);
+    // Join các table khác
+    // join = [ref_tableName, field, operator, ref_field]
+    const joins = [
+        ['ads_category', 'ads_category', '=', 'ads_category_id'],
+        ['location_type', 'location_type', '=', 'location_type_id'],
+    ];
+    //  notes: Chú ý khi cần lấy thông tin các table khác mới sử dụng hàm này, còn không cứ sài hàm getAll()
+    const result = await model.getAllWithJoin(conditions, joins);
     res.status(200).json(result);
 };
 
 // Lấy thông tin chi tiết
 controller.getAdsLocation = async (req, res) => {
-    const id = req.params.id || 0;
-    const adsLocation = await Model.findById(id);
-    if (adsLocation === null) {
+    const id = parseInt(req.params.id) || 0;
+    const joins = [
+        ['ads_category', 'ads_category', '=', 'ads_category_id'],
+        ['location_type', 'location_type', '=', 'location_type_id'],
+    ];
+
+    const adsLocation = await model.getByIdWithJoin(id, joins);
+    if (!adsLocation) {
         return res.status(204).end();
     }
     res.status(200).json(adsLocation);
@@ -28,9 +40,9 @@ controller.getAdsLocation = async (req, res) => {
 controller.postAdsLocation = async (req, res) => {
     let data = req.body;
 
-    const ret = await Model.add(data);
+    const ret = await model.create(data);
     data = {
-        location_type_id: ret[0],
+        ads_location_id: ret[0],
         ...data,
     };
     res.status(201).json(data);
@@ -38,15 +50,15 @@ controller.postAdsLocation = async (req, res) => {
 
 // Cập nhật
 controller.patchAdsLocation = async (req, res) => {
-    const id = req.params.id || 0;
+    const id = parseInt(req.params.id) || 0;
     const data = req.body;
-    const found = await Model.findById(id);
-    if (found === null) {
+    const found = await model.getById(id);
+    if (!found) {
         // Nhớ return để kết thúc request
         return res.status(204).end();
     }
 
-    const affectedRecords = await Model.patch(id, data);
+    const affectedRecords = await model.updateById(id, data);
     return res.status(200).json({
         affected: affectedRecords,
     });
@@ -54,13 +66,13 @@ controller.patchAdsLocation = async (req, res) => {
 
 // Xoá
 controller.deleteAdsLocation = async (req, res) => {
-    const id = req.params.id || 0;
-    const found = await Model.findById(id);
-    if (found === null) {
+    const id = parseInt(req.params.id) || 0;
+    const found = await model.getById(id);
+    if (!found) {
         // Nhớ return để kết thúc request
         return res.status(204).end();
     }
-    const affectedRecords = await Model.del(id);
+    const affectedRecords = await model.deleteById(id);
     return res.status(200).json({
         affected: affectedRecords,
     });

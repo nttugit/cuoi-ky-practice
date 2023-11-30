@@ -23,11 +23,14 @@ CREATE TABLE `location_type` (
 -- Địa điểm đặt quảng cáo
 DROP TABLE IF EXISTS `ads_location`;
 CREATE TABLE `ads_location` (
-	`ads_location_id` INT unsigned NOT NULL AUTO_INCREMENT, 
+	`ads_location_id` INT  NOT NULL AUTO_INCREMENT, 
+	`ads_category` INT UNSIGNED,
+    `location_type` INT UNSIGNED,
+    
 	`address` VARCHAR(512),
-	`location_type` INT unsigned,
-	`ads_category` INT unsigned,
-	
+    `is_planned` BOOL DEFAULT FALSE,
+    `status` ENUM('0','1','2','3','4') DEFAULT '0',
+    
 	PRIMARY KEY(`ads_location_id`)
 );
 
@@ -38,7 +41,18 @@ ALTER TABLE `ads_location` ADD CONSTRAINT FOREIGN KEY (`ads_category`)
 REFERENCES `ads_category` (`ads_category_id`);
 
 --  Insert dữ liệu
+Insert ads_category (ads_category_name) values
+('Cổ động chính trị'),
+('Quảng cáo thương mại'),
+('Xã hội hoá');
 
-
-
-
+Insert location_type (location_type_name) values
+('Đất công'),
+('Công viên'),
+('Hành lang an toàn giao thông'),
+('Đất tư nhân'),
+('Nhà ở riêng lẻ'),
+('Trung tâm thương mại'),
+('Chợ'),
+('Cây xăng'),
+('Nhà chờ xe buýt');

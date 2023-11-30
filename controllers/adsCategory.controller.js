@@ -1,26 +1,24 @@
 /**
  * notes:
  * - nhớ import đúng model dưới đây
- * - resp là kết quả trả về khi thao tác với database, cứ giữ nguyên tên biến cho dễ
  */
 import Model from '../models/adsCategory.model.js';
-// import AdsCategoryModel from '../models/adsCategory.model.js';
-// import LocationTypeModel from '../models/locationType.model.js';
+const model = new Model();
 
 const controller = {};
 
 // Lấy danh sách
 controller.getAdsCategories = async (req, res) => {
     const conditions = {};
-    const result = await Model.findAll(conditions);
+    const result = await model.getAll(conditions);
     res.status(200).json(result);
 };
 
 // Lấy thông tin chi tiết
 controller.getAdsCategory = async (req, res) => {
-    const id = req.params.id || 0;
-    const adsCategory = await Model.findById(id);
-    if (adsCategory === null) {
+    const id = parseInt(req.params.id) || 0;
+    const adsCategory = await model.getById(id);
+    if (!adsCategory) {
         return res.status(204).end();
     }
     res.status(200).json(adsCategory);
@@ -30,7 +28,7 @@ controller.getAdsCategory = async (req, res) => {
 controller.postAdsCategory = async (req, res) => {
     let data = req.body;
 
-    const ret = await Model.add(data);
+    const ret = await model.create(data);
     data = {
         ads_category_id: ret[0],
         ...data,
@@ -40,15 +38,15 @@ controller.postAdsCategory = async (req, res) => {
 
 // Cập nhật
 controller.patchAdsCategory = async (req, res) => {
-    const id = req.params.id || 0;
+    const id = parseInt(req.params.id) || 0;
     const data = req.body;
-    const found = await Model.findById(id);
-    if (found === null) {
+    const found = await model.getById(id);
+    if (!found) {
         // Nhớ return để kết thúc request
         return res.status(204).end();
     }
 
-    const affectedRecords = await Model.patch(id, data);
+    const affectedRecords = await model.updateById(id, data);
     return res.status(200).json({
         affected: affectedRecords,
     });
@@ -56,13 +54,13 @@ controller.patchAdsCategory = async (req, res) => {
 
 // Xoá
 controller.deleteAdsCategory = async (req, res) => {
-    const id = req.params.id || 0;
-    const found = await Model.findById(id);
-    if (found === null) {
+    const id = parseInt(req.params.id) || 0;
+    const found = await model.getById(id);
+    if (!found) {
         // Nhớ return để kết thúc request
         return res.status(204).end();
     }
-    const affectedRecords = await Model.del(id);
+    const affectedRecords = await model.deleteById(id);
     return res.status(200).json({
         affected: affectedRecords,
     });

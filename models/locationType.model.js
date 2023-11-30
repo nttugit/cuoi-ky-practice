@@ -1,5 +1,10 @@
-import generate from './geneic.model.js';
+import BaseModel from './base.model.js';
 
-// notes: nhớ cập nhật chỗ này TÊN MODEL và KHOÁ CHÍNH tương ứng
-const obj = generate('location_type', 'location_type_id');
-export default obj;
+class LocationTypeModel extends BaseModel {
+    constructor() {
+        super('location_type', 'location_type_id');
+    }
+    // Mở rộng thêm code ở đây
+}
+
+export default LocationTypeModel;

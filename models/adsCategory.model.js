@@ -1,5 +1,10 @@
-import generate from './geneic.model.js';
+import BaseModel from './base.model.js';
 
-// notes: nhớ cập nhật chỗ này TÊN MODEL và KHOÁ CHÍNH tương ứng
-const obj = generate('ads_category', 'ads_category_id');
-export default obj;
+class AdsCategoryModel extends BaseModel {
+    constructor() {
+        super('ads_category', 'ads_category_id');
+    }
+    // Mở rộng thêm code ở đây
+}
+
+export default AdsCategoryModel;
