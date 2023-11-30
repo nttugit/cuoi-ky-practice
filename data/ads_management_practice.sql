@@ -76,3 +76,29 @@ Insert billboard_type (billboard_type_name) values
 ('Trụ treo băng rôn ngang'),
 ('Trụ/Cụm pano, Cổng chào'),
 ('Trung tâm thương mại');
+
+
+-- Biển quảng cáo
+DROP TABLE IF EXISTS `ads`;
+CREATE TABLE `ads` (
+	`ads_id` INT  NOT NULL AUTO_INCREMENT, 
+    `content` TEXT,
+	`start_date` DATE,
+    `end_date` DATE,
+    `height` INT,
+    `width` INT, 
+    `price` FLOAT,
+	
+    -- Loai bien quang cao
+    `billboard_type` INT UNSIGNED,
+    -- Dia diem dat bien quang cao
+	`ads_location` INT UNSIGNED, 
+
+    `is_planned` BOOL DEFAULT FALSE,
+    `status` ENUM('0','1','2','3','4') DEFAULT '0',
+	PRIMARY KEY(`ads_id`)
+);
+ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`billboard_type`) 
+REFERENCES `billboard_type` (`billboard_type_id`);
+ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`ads_location`) 
+REFERENCES `ads_location` (`ads_location_id`);

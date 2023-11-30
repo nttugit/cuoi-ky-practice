@@ -13,6 +13,8 @@ const port = process.env.PORT || 3000; //Mặc định là port 3000
 
 // XỬ LÝ ROUTES
 
+// Biển quảng cáo
+import adsRouter from './routes/ads.route.js';
 // Địa điểm đặt quảng cáo
 import adsLocationRouter from './routes/adsLocation.route.js';
 // Hình thức quảng cáo
@@ -26,6 +28,7 @@ app.get('/', (req, res) => {
     res.status(200).json('Hello World!');
 });
 
+app.use('/ads', adsRouter);
 app.use('/ads-locations', adsLocationRouter);
 app.use('/ads-categories', adsCategoryRouter);
 app.use('/location-types', locationTypeRouter);
