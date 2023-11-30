@@ -56,3 +56,23 @@ Insert location_type (location_type_name) values
 ('Chợ'),
 ('Cây xăng'),
 ('Nhà chờ xe buýt');
+
+-- Loại biển quảng cáo
+DROP TABLE IF EXISTS `billboard_type`;
+CREATE TABLE `billboard_type` (
+	`billboard_type_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`billboard_type_name` VARCHAR(255),
+	
+	PRIMARY KEY(`billboard_type_id`)
+);
+
+Insert billboard_type (billboard_type_name) values
+('Trụ bảng hiflex'),
+('Trụ màn hình điện tử LED'),
+('Trụ hộp đèn'),
+('Bảng hiflex ốp tường'),
+('Màn hình điện tử ốp tường'),
+('Trụ treo băng rôn dọc'),
+('Trụ treo băng rôn ngang'),
+('Trụ/Cụm pano, Cổng chào'),
+('Trung tâm thương mại');

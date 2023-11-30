@@ -1,4 +1,4 @@
-# Luyện tập Vuejs, ExpressJs, Mongodb
+# Luyện tập ExpressJs, MySql (Knex)
 
 ## Chi tiết
 
@@ -14,5 +14,4 @@ https://hackmd.io/@nndkhoa9/rkYF2FLGT
 ## Lưu ý:
 
 -   Luồng hoạt động cơ bản
--   APIs của todo là cơ bản nhất, nên phát triển từ đây
--   Các APIs khác có populate (giống tham chiếu) sẽ phức tạp hơn (tham khảo file adsLocation.controller.js, dòng 14), nhưng chỉ khác biệt trong controllers, còn mấy file khác copy giống nhau
+-   APIs của adsCategory là cơ bản nhất, nên phát triển từ đây

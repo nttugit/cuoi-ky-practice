@@ -12,10 +12,15 @@ app.use(cors());
 const port = process.env.PORT || 3000; //Mặc định là port 3000
 
 // XỬ LÝ ROUTES
-// Ads Location routes
+
+// Địa điểm đặt quảng cáo
 import adsLocationRouter from './routes/adsLocation.route.js';
+// Hình thức quảng cáo
 import adsCategoryRouter from './routes/adsCategory.route.js';
+// Loại điểm điểm đặt quảng cáo
 import locationTypeRouter from './routes/locationType.route.js';
+// Loại bảng quảng cáo
+import billboardType from './routes/billboardType.route.js';
 
 app.get('/', (req, res) => {
     res.status(200).json('Hello World!');
@@ -24,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/ads-locations', adsLocationRouter);
 app.use('/ads-categories', adsCategoryRouter);
 app.use('/location-types', locationTypeRouter);
+app.use('/billboard-types', billboardType);
 
 // Xử lý lỗi 404
 app.use((req, res) => {
