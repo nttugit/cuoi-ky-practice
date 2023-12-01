@@ -42,8 +42,14 @@ controller.getAds = async (req, res) => {
 // Tạo mới
 controller.postAds = async (req, res) => {
     let data = req.body;
+    const fileNames = req.fileNames || [];
+
     data.start_date = convertToMySqlDate(data.start_date);
     data.end_date = convertToMySqlDate(data.end_date);
+    if (fileNames.length > 0) {
+        data.images = fileNames.join(',');
+    }
+
     const ret = await model.create(data);
     data = {
         ads_id: ret[0],

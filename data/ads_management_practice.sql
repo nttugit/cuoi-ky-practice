@@ -88,7 +88,9 @@ CREATE TABLE `ads` (
     `height` INT,
     `width` INT, 
     `price` FLOAT,
-	
+    
+    -- Để dễ dàng, khỏi phải join table, lưu danh sách tên hình ảnh, lấy và cắt ra là được
+	`images` TEXT,
     -- Loai bien quang cao
     `billboard_type` INT UNSIGNED,
     -- Dia diem dat bien quang cao
@@ -102,6 +104,7 @@ ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`billboard_type`)
 REFERENCES `billboard_type` (`billboard_type_id`);
 ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`ads_location`) 
 REFERENCES `ads_location` (`ads_location_id`);
+
 
 
 -- Hình ảnh

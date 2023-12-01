@@ -19,10 +19,12 @@ export const upload = multer({
  * Resize, lưu vào folder 'uploads' và database
  *
  */
-export async function uploadAndResizeImages(req, res, next) {
+export async function resizeAndSaveImages(req, res, next) {
     if (!req.files || req.files.length === 0) {
         return res.status(400).send('No files uploaded.');
     }
+    const fileNames = [];
+
     Promise.all(
         req.files.map((file) => {
             return sharp(file.buffer)
@@ -49,12 +51,16 @@ export async function uploadAndResizeImages(req, res, next) {
                     };
                     model.create(fileData);
 
+                    // Trả về để update field images cho những table chứa nó
+                    // fileNames.push(fileName);
+
+                    // req.locals.fileNames = fileNames;
                     return fileName;
                 });
         }),
     )
         .then((fileNames) => {
-            // console.log('Uploaded: ' + fileNames);
+            req.fileNames = fileNames;
             next();
         })
         .catch((err) => {

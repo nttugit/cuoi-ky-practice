@@ -30,6 +30,11 @@ controller.getImage = async (req, res) => {
     res.status(200).sendFile(filePath);
 };
 
+// Tạo
+controller.postImage = async (req, res) => {
+    res.status(200).json(req.fileNames);
+};
+
 // Xoá
 controller.deleteImage = async (req, res) => {
     const { imageName } = req.params;
