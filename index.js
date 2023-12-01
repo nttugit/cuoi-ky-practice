@@ -24,6 +24,9 @@ import locationTypeRouter from './routes/locationType.route.js';
 // Loại bảng quảng cáo
 import billboardType from './routes/billboardType.route.js';
 
+// Các routes khác
+import imageRouter from './routes/image.route.js';
+
 app.get('/', (req, res) => {
     res.status(200).json('Hello World!');
 });
@@ -33,6 +36,7 @@ app.use('/ads-locations', adsLocationRouter);
 app.use('/ads-categories', adsCategoryRouter);
 app.use('/location-types', locationTypeRouter);
 app.use('/billboard-types', billboardType);
+app.use('/images', imageRouter);
 
 // Xử lý lỗi 404
 app.use((req, res) => {
@@ -41,6 +45,7 @@ app.use((req, res) => {
 
 // Xử lý lỗi 500
 app.use((err, req, res, next) => {
+    console.log(err.message);
     res.status(500).json('Something went wrong');
 });
 

@@ -1,8 +1,9 @@
 # Luyện tập ExpressJs, MySql (Knex)
 
-## Chi tiết
+## Thông tin cơ bản
 
-https://hackmd.io/@nndkhoa9/rkYF2FLGT
+-   Node version: 18.17.0
+-   Dự án tham khảo: https://hackmd.io/@nndkhoa9/rkYF2FLGT
 
 ## Cách sử dụng:
 

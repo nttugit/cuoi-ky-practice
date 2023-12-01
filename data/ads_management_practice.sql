@@ -102,3 +102,21 @@ ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`billboard_type`)
 REFERENCES `billboard_type` (`billboard_type_id`);
 ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`ads_location`) 
 REFERENCES `ads_location` (`ads_location_id`);
+
+
+-- Hình ảnh
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE `image` (
+	`image_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	
+    `file_name` VARCHAR(255),
+    `path` VARCHAR(255),
+    `extension` vARCHAR(10),
+    
+    `original_name` VARCHAR(255),
+    `original_size` float,
+	`original_mime_type` varchar(255),
+    
+    `created_at` datetime default current_timestamp,
+	PRIMARY KEY(`image_id`)
+);

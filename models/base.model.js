@@ -65,6 +65,14 @@ class BaseModel {
         return query;
     }
 
+    async getOne(conditions = {}) {
+        return this.knex
+            .select('*')
+            .from(this.tableName)
+            .where(conditions)
+            .first();
+    }
+
     async create(data) {
         return this.knex(this.tableName).insert(data);
     }
@@ -83,6 +91,10 @@ class BaseModel {
         return this.knex(this.tableName)
             .where({ [this.tableId]: id })
             .del();
+    }
+
+    async deleteOne(conditions = {}) {
+        return this.knex.from(this.tableName).where(conditions).del();
     }
 }
 
