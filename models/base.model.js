@@ -18,6 +18,13 @@ class BaseModel {
         return query;
     }
 
+    leftJoin(query, joins = []) {
+        joins.forEach((join) => {
+            query = query.leftJoin(join[0], join[1], join[3]);
+        });
+        return query;
+    }
+
     async getAll(conditions = {}) {
         return this.knex.select('*').from(this.tableName).where(conditions);
     }
@@ -31,7 +38,7 @@ class BaseModel {
 
         // Join các table khác
         if (joins.length > 0) {
-            query = this.join(query, joins);
+            query = this.leftJoin(query, joins);
         }
 
         return query;
@@ -59,7 +66,7 @@ class BaseModel {
 
         // Join các table khác
         if (joins.length > 0) {
-            query = this.join(query, joins);
+            query = this.leftJoin(query, joins);
         }
 
         return query;
