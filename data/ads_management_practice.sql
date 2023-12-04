@@ -28,6 +28,8 @@ CREATE TABLE `ads_location` (
     `location_type` INT UNSIGNED,
     
 	`address` VARCHAR(512),
+    `lat`FLOAT,
+    `long` FLOAT,
     `is_planned` BOOL DEFAULT FALSE,
     `status` ENUM('0','1','2','3','4') DEFAULT '0',
     
@@ -106,7 +108,6 @@ ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`ads_location`)
 REFERENCES `ads_location` (`ads_location_id`);
 
 
-
 -- Hình ảnh
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE `image` (
@@ -123,3 +124,13 @@ CREATE TABLE `image` (
     `created_at` datetime default current_timestamp,
 	PRIMARY KEY(`image_id`)
 );
+
+
+
+
+
+
+
+
+
+

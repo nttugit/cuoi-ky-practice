@@ -39,7 +39,6 @@ controller.getAdsLocation = async (req, res) => {
 // Tạo mới
 controller.postAdsLocation = async (req, res) => {
     let data = req.body;
-
     const ret = await model.create(data);
     data = {
         ads_location_id: ret[0],
