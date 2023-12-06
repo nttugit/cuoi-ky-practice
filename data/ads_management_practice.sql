@@ -31,8 +31,8 @@ CREATE TABLE `ads_location` (
     `lat`FLOAT,
     `long` FLOAT,
     `is_planned` BOOL DEFAULT FALSE,
-    `status` ENUM('0','1','2','3','4') DEFAULT '0',
-    
+    -- `ads_location_status` ENUM('0','1','2','3','4') DEFAULT '0',
+   `ads_location_status` SMALLINT UNSIGNED DEFAULT 0,
 	PRIMARY KEY(`ads_location_id`)
 );
 
@@ -84,6 +84,7 @@ Insert billboard_type (billboard_type_name) values
 DROP TABLE IF EXISTS `ads`;
 CREATE TABLE `ads` (
 	`ads_id` INT  NOT NULL AUTO_INCREMENT, 
+    `title` varchar(255),
     `content` TEXT,
 	`start_date` DATE,
     `end_date` DATE,
@@ -99,7 +100,9 @@ CREATE TABLE `ads` (
 	`ads_location` INT UNSIGNED, 
 
     `is_planned` BOOL DEFAULT FALSE,
-    `status` ENUM('0','1','2','3','4') DEFAULT '0',
+    -- `status` ENUM('0','1','2','3','4') DEFAULT '0',
+    `ads_status` SMALLINT UNSIGNED DEFAULT 0,
+    
 	PRIMARY KEY(`ads_id`)
 );
 ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`billboard_type`) 
@@ -107,6 +110,7 @@ REFERENCES `billboard_type` (`billboard_type_id`);
 ALTER TABLE `ads` ADD CONSTRAINT FOREIGN KEY (`ads_location`) 
 REFERENCES `ads_location` (`ads_location_id`);
 
+-- alter table `ads` add `ads_status` SMALLINT UNSIGNED;
 
 -- Hình ảnh
 DROP TABLE IF EXISTS `image`;

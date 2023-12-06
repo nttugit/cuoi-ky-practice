@@ -42,10 +42,14 @@ controller.getAds = async (req, res) => {
 // Tạo mới
 controller.postAds = async (req, res) => {
     let data = req.body;
+    // return res.status(201).json('hello');
+
     const fileNames = req.fileNames || [];
 
-    data.start_date = convertToMySqlDate(data.start_date);
-    data.end_date = convertToMySqlDate(data.end_date);
+    // data.start_date = convertToMySqlDate(data.start_date);
+    // data.end_date = convertToMySqlDate(data.end_date);
+    data.billboard_type = data.billboard_type || 1;
+    delete data['images'];
     if (fileNames.length > 0) {
         data.images = fileNames.join(',');
     }
@@ -62,14 +66,18 @@ controller.postAds = async (req, res) => {
 controller.patchAds = async (req, res) => {
     const id = parseInt(req.params.id) || 0;
     const data = req.body;
-    data.start_date = convertToMySqlDate(data.start_date);
-    data.end_date = convertToMySqlDate(data.end_date);
+
     const found = await model.getById(id);
     if (!found) {
         // Nhớ return để kết thúc request
         return res.status(204).end();
     }
 
+    // data.start_date = convertToMySqlDate(data.start_date);
+    // data.end_date = convertToMySqlDate(data.end_date);
+    data.billboard_type = data.billboard_type || 1;
+    data.status = parseInt(data.status);
+    console.log('data', data);
     const affectedRecords = await model.updateById(id, data);
     return res.status(200).json({
         affected: affectedRecords,

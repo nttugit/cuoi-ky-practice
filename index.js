@@ -5,11 +5,12 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const corsOptions = {
-    origin: 'http://localhost:5173',
-}
+// const corsOptions = {
+//     origin: 'http://localhost:5173',
+// };
 app.use(express.json());
-// app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // notes: đổi port nểu muốn
 const port = process.env.PORT || 3000; //Mặc định là port 3000
