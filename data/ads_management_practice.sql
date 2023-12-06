@@ -23,7 +23,7 @@ CREATE TABLE `location_type` (
 -- Địa điểm đặt quảng cáo
 DROP TABLE IF EXISTS `ads_location`;
 CREATE TABLE `ads_location` (
-	`ads_location_id` INT  NOT NULL AUTO_INCREMENT, 
+	`ads_location_id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	`ads_category` INT UNSIGNED,
     `location_type` INT UNSIGNED,
     
@@ -58,6 +58,12 @@ Insert location_type (location_type_name) values
 ('Chợ'),
 ('Cây xăng'),
 ('Nhà chờ xe buýt');
+
+insert ads_location (ads_category, location_type, address, lat, `long`) values
+(1, 1, '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, Thành phố Hồ Chí Minh', 10.763130701888972, 106.68249313122101),
+(2, 2, '135 Đ. Trần Hưng Đạo, Phường Cầu Ông Lãnh, Quận 1, Thành phố Hồ Chí Minh, Vietnam', 10.767305718633947, 106.69480349949058),
+(2, 3, '373 Hồ Thị Hương, Xuân Thanh, Long Khánh, Đồng Nai, Vietnam', 10.933385156243737, 107.25372021440823),
+(1, 3, '720A Đ. Điện Biên Phủ, Vinhomes Tân Cảng, Bình Thạnh, Thành phố Hồ Chí Minh, Vietnam', 10.795193364264485, 106.72188587608578);
 
 -- Loại biển quảng cáo
 DROP TABLE IF EXISTS `billboard_type`;
@@ -112,22 +118,22 @@ REFERENCES `ads_location` (`ads_location_id`);
 
 -- alter table `ads` add `ads_status` SMALLINT UNSIGNED;
 
--- Hình ảnh
-DROP TABLE IF EXISTS `image`;
-CREATE TABLE `image` (
-	`image_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	
-    `file_name` VARCHAR(255),
-    `path` VARCHAR(255),
-    `extension` vARCHAR(10),
-    
-    `original_name` VARCHAR(255),
-    `original_size` float,
-	`original_mime_type` varchar(255),
-    
-    `created_at` datetime default current_timestamp,
-	PRIMARY KEY(`image_id`)
-);
+-- Hình ảnh (tạm thời không sử dụng)
+-- DROP TABLE IF EXISTS `image`;
+-- CREATE TABLE `image` (
+-- 	`image_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+-- 	
+--     `file_name` VARCHAR(255),
+--     `path` VARCHAR(255),
+--     `extension` vARCHAR(10),
+--     
+--     `original_name` VARCHAR(255),
+--     `original_size` float,
+-- 	`original_mime_type` varchar(255),
+--     
+--     `created_at` datetime default current_timestamp,
+-- 	PRIMARY KEY(`image_id`)
+-- );
 
 
 
