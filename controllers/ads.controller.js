@@ -76,7 +76,7 @@ controller.patchAds = async (req, res) => {
     // data.start_date = convertToMySqlDate(data.start_date);
     // data.end_date = convertToMySqlDate(data.end_date);
     data.billboard_type = data.billboard_type || 1;
-    data.status = parseInt(data.status);
+    // data.ads = parseInt(data.status);
     console.log('data', data);
     const affectedRecords = await model.updateById(id, data);
     return res.status(200).json({
